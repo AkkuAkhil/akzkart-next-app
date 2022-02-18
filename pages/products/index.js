@@ -16,12 +16,7 @@ const ProductsPage = props => {
 
   if (!products || !products.length) return <h1>No Products</h1>;
 
-  return (
-    <div>
-      <h1>All Products</h1>
-      <ProductContainer products={products} />
-    </div>
-  );
+  return <ProductContainer products={products} />;
 };
 
 export const getStaticProps = async () => {

@@ -23,14 +23,11 @@ const AdminProductsPage = props => {
   if (!products || !products.length) return <h1>No Products</h1>;
 
   return (
-    <div>
-      <h1>My Products</h1>
-      <ProductContainer
-        products={products}
-        admin={true}
-        setLatestProducts={setLatestProducts}
-      />
-    </div>
+    <ProductContainer
+      products={products}
+      admin={true}
+      setLatestProducts={setLatestProducts}
+    />
   );
 };
 

@@ -1,21 +1,8 @@
-import Image from 'next/image';
-import { myLoader } from '../../helpers/utils';
+import ProductDetail from '../../components/Products/ProductDetail';
 import { fetchProductById, getAllIdParams } from '../../helpers/db-utils';
 
 const ProductsPage = ({ product }) => {
-  return (
-    <div>
-      <h1>{product.name}</h1>
-      <Image
-        loader={myLoader}
-        alt={product.name}
-        src={product.image}
-        width={256}
-        height={256}
-      />
-      <p>{product.price}</p>
-    </div>
-  );
+  return <ProductDetail product={product} />;
 };
 
 export const getStaticProps = async context => {

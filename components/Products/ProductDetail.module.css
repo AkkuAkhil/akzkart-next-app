@@ -1,0 +1,37 @@
+.productContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 5%;
+}
+
+.productImageDiv {
+  margin-right: 3rem;
+}
+
+.productDetailsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.productName {
+  margin: 0;
+  padding: 0;
+  font-size: 4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.productPrice {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.productDelivery {
+  font-size: 1rem;
+  font-style: italic;
+}

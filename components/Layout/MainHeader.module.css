@@ -1,0 +1,38 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 8%;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.navigationContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navigationItem {
+  margin: 0 1rem;
+}
+
+.navigation a {
+  color: black;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navigation a:hover {
+  text-shadow: 2px 2px 8px rgb(102, 102, 102);
+}
+
+@media screen and (max-width: 600px) {
+  .navigation a {
+    font-size: 0.7rem;
+  }
+}
