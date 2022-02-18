@@ -50,7 +50,7 @@ const ProductItem = ({ product, admin, setLatestProducts }) => {
       if (quantity === 10) return 10;
       return quantity + 1;
     });
-    addToCart({ ...product, quantity: quantity + 1 });
+    if (quantity <= 9) addToCart({ ...product, quantity: quantity + 1 });
   };
 
   return (

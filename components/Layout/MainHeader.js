@@ -1,11 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useContext } from 'react';
 import { ShoppingCart } from 'react-feather';
+import CartContext from '../../contexts/CartContext';
 import Cart from '../UI/Cart';
 import Logo from '../UI/Logo';
 import classes from './MainHeader.module.css';
 
 const MainHeader = props => {
+  const { totalQuantity } = useContext(CartContext);
+
   return (
     <header className={classes.header}>
       <div>
@@ -28,6 +32,11 @@ const MainHeader = props => {
             <Cart link='/cart'>
               <span className='iconGroup'>
                 <ShoppingCart className='icon' /> Cart
+                {totalQuantity > 0 && (
+                  <span className={classes.navigationCartQuantity}>
+                    {totalQuantity}
+                  </span>
+                )}
               </span>
             </Cart>
           </li>

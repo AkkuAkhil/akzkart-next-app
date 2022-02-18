@@ -54,3 +54,15 @@ button:focus {
 .icon-s {
   width: 1rem;
 }
+
+.icon-m {
+  width: 1rem;
+}
+
+.icon-l {
+  width: 1.5rem;
+}
+
+.icon-margin {
+  margin: 0 0.3rem;
+}
