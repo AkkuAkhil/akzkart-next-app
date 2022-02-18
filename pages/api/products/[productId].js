@@ -16,7 +16,8 @@ const handler = async (req, res) => {
         const updatedProduct = {
           name: req.body.name || product.name,
           price: req.body.price || product.price,
-          image: req.body.image || product.image
+          image: req.body.image || product.image,
+          description: req.body.description || product.description
         };
         await Product.updateOne({ _id: productId }, updatedProduct);
         res.status(201).json({ success: true, message: UPDATE_SUCCESS });

@@ -19,7 +19,7 @@ const handler = async (req, res) => {
     case 'POST':
       try {
         const product = new Product(req.body);
-        const response = await product.save();
+        await product.save();
         res.status(201).json({ success: true, message: INSERTION_SUCCESS });
       } catch (error) {
         res.status(400).json({ success: false });

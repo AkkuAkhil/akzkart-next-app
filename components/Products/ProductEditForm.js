@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import classes from './ProductForm.module.css';
-import { DollarSign, Image, RefreshCw, Tag } from 'react-feather';
+import { DollarSign, FileText, Image, RefreshCw, Tag } from 'react-feather';
 
 const ProductEditForm = ({ product }) => {
   const form = useRef();
@@ -9,10 +9,11 @@ const ProductEditForm = ({ product }) => {
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
   const [image, setImage] = useState(product.image);
+  const [description, setDescription] = useState(product.description);
 
   const submitHandler = async event => {
     event.preventDefault();
-    const updatedProduct = { name, price, image };
+    const updatedProduct = { name, price, image, description };
     form.current.reset();
 
     const response = await fetch(`/api/products/${product._id}`, {
@@ -66,6 +67,21 @@ const ProductEditForm = ({ product }) => {
             id='image'
             value={image}
             onChange={e => setImage(e.target.value)}
+          />
+        </div>
+        <div className={classes.formDiv}>
+          <label htmlFor='description'>
+            <span className='iconGroup'>
+              <FileText className='icon' /> Product Description
+            </span>
+          </label>
+          <textarea
+            rows={3}
+            type='text'
+            id='description'
+            autoComplete='On'
+            value={description}
+            onChange={e => setDescription(e.target.value)}
           />
         </div>
         <button className={classes.formButton}>

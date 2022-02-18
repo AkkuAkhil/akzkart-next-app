@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import classes from './ProductForm.module.css';
-import { DollarSign, Image, Plus, Tag } from 'react-feather';
+import { DollarSign, FileText, Image, Plus, Tag } from 'react-feather';
 
 const ProductAddForm = () => {
   const router = useRouter();
@@ -9,6 +9,7 @@ const ProductAddForm = () => {
   const name = useRef();
   const price = useRef();
   const image = useRef();
+  const description = useRef();
   const form = useRef();
 
   const submitHandler = async event => {
@@ -16,7 +17,10 @@ const ProductAddForm = () => {
     const product = {
       name: name.current.value,
       price: price.current.value,
-      image: image.current.value
+      image: image.current.value,
+      description: description.current.value,
+      rating: 0,
+      count: 0
     };
     form.current.reset();
 
@@ -56,6 +60,20 @@ const ProductAddForm = () => {
             </span>
           </label>
           <input type='url' id='image' ref={image} autoComplete='On' />
+        </div>
+        <div className={classes.formDiv}>
+          <label htmlFor='description'>
+            <span className='iconGroup'>
+              <FileText className='icon' /> Product Description
+            </span>
+          </label>
+          <textarea
+            rows={3}
+            type='text'
+            id='description'
+            ref={description}
+            autoComplete='On'
+          />
         </div>
         <button className={classes.formButton}>
           <span className='iconGroup'>

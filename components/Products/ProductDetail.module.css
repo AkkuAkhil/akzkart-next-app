@@ -1,7 +1,10 @@
+.productMainContainer {
+  margin: 5%;
+}
+
 .productContainer {
   display: flex;
   flex-direction: row;
-  margin: 5%;
 }
 
 .productImageDiv {
@@ -34,4 +37,8 @@
 .productDelivery {
   font-size: 1rem;
   font-style: italic;
+}
+
+.productDescription {
+  font-size: 1rem;
 }
