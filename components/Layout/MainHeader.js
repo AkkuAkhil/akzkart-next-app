@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ShoppingCart } from 'react-feather';
+import Cart from '../UI/Cart';
 import Logo from '../UI/Logo';
 import classes from './MainHeader.module.css';
 
@@ -21,6 +23,13 @@ const MainHeader = props => {
           </li>
           <li className={classes.navigationItem}>
             <Link href='/admin/products/add'>Add Product</Link>
+          </li>
+          <li className={classes.navigationItem}>
+            <Cart link='/cart'>
+              <span className='iconGroup'>
+                <ShoppingCart className='icon' /> Cart
+              </span>
+            </Cart>
           </li>
         </ul>
       </nav>

@@ -1,12 +1,21 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Edit, Trash, Truck } from 'react-feather';
+import { Edit, MinusSquare, PlusSquare, Trash, Truck } from 'react-feather';
 import { myLoader } from '../../helpers/utils.js';
 import classes from './ProductItem.module.css';
 import { Rating } from '@mui/material';
+import { useContext, useEffect, useState } from 'react';
+import CartContext from '../../contexts/CartContext.js';
 
 const ProductItem = ({ product, admin, setLatestProducts }) => {
   const router = useRouter();
+  const [quantity, setQuantity] = useState(0);
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+
+  const existingCartItem = cart.find(item => item._id === product._id);
+  useEffect(() => {
+    if (existingCartItem) setQuantity(existingCartItem.quantity);
+  }, [existingCartItem]);
 
   const deleteHandler = async event => {
     event.preventDefault();
@@ -21,6 +30,29 @@ const ProductItem = ({ product, admin, setLatestProducts }) => {
     router.push(`/admin/products/edit/${product._id}`);
   };
 
+  const decreaseHandler = async event => {
+    event.preventDefault();
+    setQuantity(quantity => {
+      if (quantity === 1 || quantity === 0) return 0;
+      return quantity - 1;
+    });
+
+    if (quantity - 1 === 0) {
+      removeFromCart(product._id);
+      return;
+    }
+    if (quantity >= 1) addToCart({ ...product, quantity: quantity - 1 });
+  };
+
+  const increaseHandler = async event => {
+    event.preventDefault();
+    setQuantity(quantity => {
+      if (quantity === 10) return 10;
+      return quantity + 1;
+    });
+    addToCart({ ...product, quantity: quantity + 1 });
+  };
+
   return (
     <div className={classes.productItem}>
       <Image
@@ -32,22 +64,44 @@ const ProductItem = ({ product, admin, setLatestProducts }) => {
         height={220}
       />
       <div className={classes.productDetails}>
-        <p className={classes.productName}>{product.name}</p>
-        <p className={classes.productPrice}>
-          ₹{(Math.round(product.price * 100) / 100).toFixed(2)}
-        </p>
-        <Rating
-          name='MyRating'
-          size='small'
-          defaultValue={2.5}
-          precision={0.5}
-          readOnly
-        />
-        <p className={classes.productDelivery}>
-          <span className='iconGroup'>
-            <Truck className='icon icon-s' /> Free Delivery
-          </span>
-        </p>
+        <div>
+          <p className={classes.productName}>{product.name}</p>
+        </div>
+        <div className={classes.productDetailsSection}>
+          <div>
+            <p className={classes.productPrice}>
+              ₹{(Math.round(product.price * 100) / 100).toFixed(2)}
+            </p>
+            <Rating
+              name='MyRating'
+              size='small'
+              defaultValue={2.5}
+              precision={0.5}
+              readOnly
+            />
+            <p className={classes.productDelivery}>
+              <span className='iconGroup'>
+                <Truck className='icon icon-s' /> Free Delivery
+              </span>
+            </p>
+          </div>
+          <div className={classes.quantityContainer}>
+            <button
+              className={classes.decreaseButton}
+              onClick={decreaseHandler}
+            >
+              <MinusSquare />
+            </button>
+            <p className={classes.quantityText}>{quantity}</p>
+            <button
+              className={classes.increaseButton}
+              onClick={increaseHandler}
+            >
+              <PlusSquare />
+            </button>
+          </div>
+        </div>
+
         {admin && (
           <div className={classes.buttonContainer}>
             <button className={classes.editButton} onClick={editHandler}>

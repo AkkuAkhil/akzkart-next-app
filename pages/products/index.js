@@ -14,8 +14,6 @@ const ProductsPage = props => {
     if (data) setProducts(data.products);
   }, [data]);
 
-  if (!products || !products.length) return <h1>No Products</h1>;
-
   return <ProductContainer products={products} />;
 };
 

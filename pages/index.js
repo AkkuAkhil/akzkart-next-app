@@ -14,13 +14,7 @@ const HomePage = props => {
     if (data) setProducts(data.products);
   }, [data]);
 
-  if (!products || !products.length) return <h1>No Products</h1>;
-
-  return (
-    <div>
-      <ProductContainer products={products} />
-    </div>
-  );
+  return <ProductContainer products={products} />;
 };
 
 export const getStaticProps = async () => {

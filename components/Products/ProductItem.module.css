@@ -1,4 +1,5 @@
 .productItem {
+  cursor: auto;
   margin: 1rem;
   padding: 0;
   box-shadow: 5px 10px 20px #888888;
@@ -80,4 +81,62 @@
 
 .deleteButton:hover {
   text-shadow: 2px 2px 8px #ff0000;
+}
+
+.productDetailsSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cartButton {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #00aeff;
+}
+
+.cartButton:hover {
+  transform: scale(1.2);
+}
+
+.quantityContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.decreaseButton,
+.increaseButton {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  transition: 0.3s;
+}
+
+.decreaseButton {
+  color: #ff0000;
+}
+.increaseButton {
+  color: #00a500;
+}
+
+.decreaseButton:hover,
+.increaseButton:hover {
+  transform: scale(1.2);
+}
+
+.quantityText {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 1.5rem;
+  font-weight: 600;
+  margin: 0.2rem 0.3rem 0 0.3rem;
+  padding: 0;
 }
