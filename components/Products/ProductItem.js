@@ -12,7 +12,10 @@ const ProductItem = ({ product, admin, setLatestProducts }) => {
   const [quantity, setQuantity] = useState(0);
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
-  const existingCartItem = cart.find(item => item._id === product._id);
+  let existingCartItem;
+  if (cart && cart?.length)
+    existingCartItem = cart.find(item => item._id === product._id);
+
   useEffect(() => {
     if (existingCartItem) setQuantity(existingCartItem.quantity);
   }, [existingCartItem]);

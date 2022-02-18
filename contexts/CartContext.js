@@ -20,14 +20,16 @@ export const CartProvider = props => {
   }, []);
 
   useEffect(() => {
-    const total = cart.reduce((acc, item) => acc + item.quantity, 0);
-    setTotalQuantity(total);
-    const totalPrice = cart.reduce(
-      (acc, item) => acc + item.quantity * item.price,
-      0
-    );
-    setTotalPrice(totalPrice);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    if (cart && cart?.length) {
+      const total = cart.reduce((acc, item) => acc + item.quantity, 0);
+      setTotalQuantity(total);
+      const totalPrice = cart.reduce(
+        (acc, item) => acc + item.quantity * item.price,
+        0
+      );
+      setTotalPrice(totalPrice);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
   }, [cart]);
 
   const addToCart = product => {
