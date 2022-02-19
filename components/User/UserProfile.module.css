@@ -1,0 +1,50 @@
+.UserProfileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.UserProfile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 10rem 0;
+  padding: 0;
+  border: solid 0.1rem #000;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: white;
+}
+
+.UserDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.userImageContainer {
+  margin: 0 1rem 0 0;
+  padding: 0;
+}
+
+.userImage {
+  border-radius: 50%;
+}
+
+.userName {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+}
+.userEmail {
+  font-size: 1em;
+  font-style: italic;
+  margin: 0 0 0.8rem 0;
+  padding: 0;
+}

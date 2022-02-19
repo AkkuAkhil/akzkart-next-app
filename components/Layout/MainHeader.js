@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { LogIn, LogOut, ShoppingCart, User } from 'react-feather';
 import CartContext from '../../contexts/CartContext';
+import { getFirstName } from '../../helpers/utils';
 import Cart from '../UI/Cart';
 import Logo from '../UI/Logo';
 import classes from './MainHeader.module.css';
@@ -46,7 +47,7 @@ const MainHeader = props => {
                   onClick={() => setDropDown(!dropDown)}
                   onMouseEnter={() => setDropDown(true)}
                 >
-                  {session.user.name || 'User'}
+                  {getFirstName(session.user.name) || 'User'}
                 </p>
               </span>
             ) : (
@@ -66,6 +67,9 @@ const MainHeader = props => {
               className={classes.subNavigationMenu}
               onMouseLeave={() => setDropDown(false)}
             >
+              <li className={classes.subNavigationItem}>
+                <Link href='/admin/user'>My Profile</Link>
+              </li>
               <li className={classes.subNavigationItem}>
                 <Link href='/admin/products'>My Products</Link>
               </li>

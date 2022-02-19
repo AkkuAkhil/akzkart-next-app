@@ -3,15 +3,19 @@ import CartContext from '../../contexts/CartContext.js';
 import CartItem from './CartItem.js';
 import classes from './CartContainer.module.css';
 import { ShoppingBag, ShoppingCart, XCircle } from 'react-feather';
-import { delay } from '../../helpers/utils.js';
+import { delay, getFirstName } from '../../helpers/utils.js';
+import { useSession } from 'next-auth/react';
 
 const CartContainer = () => {
+  const { data: session } = useSession();
   const { cart, totalPrice, clearCart } = useContext(CartContext);
 
   if (!cart || !cart.length) {
     return (
       <div className={classes.CartContainer}>
-        <h1>Your cart is empty</h1>
+        <h1>
+          Hi {getFirstName(session?.user?.name || 'User')}, Your Cart is Empty
+        </h1>
       </div>
     );
   }
@@ -25,7 +29,7 @@ const CartContainer = () => {
 
   return (
     <div className={classes.CartContainer}>
-      <h1>Hi user, Your Cart</h1>
+      <h1>Hi {getFirstName(session?.user?.name || 'User')}, Your Cart</h1>
       {cart.map(product => (
         <CartItem key={product._id} product={product} />
       ))}

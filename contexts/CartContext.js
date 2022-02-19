@@ -29,17 +29,23 @@ export const CartProvider = props => {
       );
       setTotalPrice(totalPrice);
       localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      setTotalQuantity(0);
+      setTotalPrice(0);
     }
   }, [cart]);
 
   const addToCart = product => {
     setCart(cart => {
-      if (cart.find(item => item._id === product._id)) {
-        const index = cart.findIndex(item => item._id === product._id);
-        cart[index].quantity = product.quantity;
-        return [...cart];
+      if (cart && cart.length) {
+        if (cart.find(item => item._id === product._id)) {
+          const index = cart.findIndex(item => item._id === product._id);
+          cart[index].quantity = product.quantity;
+          return [...cart];
+        }
+        return [...cart, product];
       }
-      return [...cart, product];
+      return [product];
     });
   };
 
