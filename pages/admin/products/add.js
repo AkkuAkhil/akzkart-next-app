@@ -2,7 +2,7 @@ import { getSession } from 'next-auth/react';
 import ProductAddForm from '../../../components/Products/ProductAddForm';
 
 const AddProductPage = ({ user }) => {
-  return <ProductAddForm />;
+  return <ProductAddForm email={user.email} />;
 };
 
 export const getServerSideProps = async context => {

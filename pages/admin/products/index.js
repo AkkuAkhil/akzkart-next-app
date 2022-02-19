@@ -2,17 +2,17 @@ import { getSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import ProductContainer from '../../../components/Products/ProductContainer';
-import { fetchAllProducts } from '../../../helpers/db-utils';
+import { fetchMyProducts } from '../../../helpers/db-utils';
+import { generateUserId } from '../../../helpers/utils';
 
 const AdminProductsPage = props => {
   const [products, setProducts] = useState(props.products);
+  const URL = `/api/user/${props.userId}`;
 
-  const { data } = useSWR('/api/products', url =>
-    fetch(url).then(res => res.json())
-  );
+  const { data } = useSWR(URL, url => fetch(url).then(res => res.json()));
 
   const setLatestProducts = async () => {
-    const response = await fetch('/api/products');
+    const response = await fetch(URL);
     const { products } = await response.json();
     setProducts(products);
   };
@@ -31,11 +31,14 @@ const AdminProductsPage = props => {
 };
 
 export const getServerSideProps = async context => {
-  const products = await fetchAllProducts();
   const session = await getSession(context);
   if (!session) return { redirect: { destination: '/', permanent: false } };
   const user = session.user;
-  return { props: { user, products } };
+
+  const userId = generateUserId(user.email);
+  const products = await fetchMyProducts(userId);
+
+  return { props: { userId, products } };
 };
 
 export default AdminProductsPage;

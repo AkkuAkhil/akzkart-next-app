@@ -2,11 +2,13 @@ import { useContext } from 'react';
 import CartContext from '../../contexts/CartContext.js';
 import CartItem from './CartItem.js';
 import classes from './CartContainer.module.css';
-import { ShoppingBag, ShoppingCart, XCircle } from 'react-feather';
-import { delay, getFirstName } from '../../helpers/utils.js';
+import { ShoppingBag, ShoppingCart } from 'react-feather';
+import { delay, generateUserId, getFirstName } from '../../helpers/utils.js';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const CartContainer = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const { cart, totalPrice, clearCart } = useContext(CartContext);
 
@@ -21,10 +23,30 @@ const CartContainer = () => {
   }
 
   const checkout = async () => {
+    if (!session) return alert('Please Login to Checkout');
+
     alert('Paying');
-    await delay(2000);
-    alert('Payment successful');
-    clearCart();
+    await delay(1000);
+    const userId = generateUserId(session?.user?.email || '');
+
+    const response = await fetch(`/api/orders/${userId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cart,
+        totalPrice,
+        date: Date.now(),
+        userId: generateUserId(session?.user?.email)
+      })
+    });
+
+    if (response.ok) {
+      alert('Payment successful');
+      clearCart();
+      router.push('/admin/orders');
+    } else {
+      alert('Payment failed');
+    }
   };
 
   return (

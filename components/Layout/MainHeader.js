@@ -74,6 +74,9 @@ const MainHeader = props => {
                 <Link href='/admin/products'>My Products</Link>
               </li>
               <li className={classes.subNavigationItem}>
+                <Link href='/admin/orders'>My Orders</Link>
+              </li>
+              <li className={classes.subNavigationItem}>
                 <Link href='/admin/products/add'>Add Product</Link>
               </li>
               <li className={classes.subNavigationItem}>

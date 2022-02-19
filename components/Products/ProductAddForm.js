@@ -2,8 +2,9 @@ import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import classes from './ProductForm.module.css';
 import { DollarSign, FileText, Image, Plus, Tag } from 'react-feather';
+import { generateUserId } from '../../helpers/utils';
 
-const ProductAddForm = () => {
+const ProductAddForm = ({ email }) => {
   const router = useRouter();
 
   const name = useRef();
@@ -20,7 +21,7 @@ const ProductAddForm = () => {
       image: image.current.value,
       description: description.current.value,
       rating: 0,
-      count: 0
+      userId: generateUserId(email)
     };
     form.current.reset();
 

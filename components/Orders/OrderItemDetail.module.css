@@ -1,0 +1,42 @@
+.orderItemDetailContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: auto;
+  margin: 0.5rem 0;
+  padding: 0;
+  box-shadow: 5px 10px 20px #888888;
+  transition: 0.3s;
+  border-radius: 0.4rem;
+  width: 35rem;
+}
+
+.orderItemDetail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.orderImage {
+  margin: 0;
+  padding: 0;
+}
+
+.orderName {
+  margin: 0 1rem;
+  padding: 0;
+  font-weight: 600;
+}
+
+.orderPrice {
+  margin: 0 1rem;
+  padding: 0.3rem 0 0 0;
+}
+
+.orderQuantity {
+  margin: 0 2rem;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: 600rem;
+}

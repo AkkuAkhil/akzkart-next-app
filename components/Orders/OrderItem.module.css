@@ -1,0 +1,28 @@
+.orderItem {
+  display: flex;
+  flex-direction: column;
+  cursor: auto;
+  margin: 0.5rem;
+  padding: 0.8rem;
+  box-shadow: 5px 10px 20px #888888;
+  transition: 0.3s;
+  background-color: #ffffff;
+  border-radius: 0.4rem;
+}
+
+.orderItem:hover {
+  box-shadow: 5px 10px 8px #888888;
+}
+
+.orderDate {
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.orderTotalPrice {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  padding: 0;
+}

@@ -30,6 +30,7 @@ export const CartProvider = props => {
       setTotalPrice(totalPrice);
       localStorage.setItem('cart', JSON.stringify(cart));
     } else {
+      localStorage.setItem('cart', JSON.stringify([]));
       setTotalQuantity(0);
       setTotalPrice(0);
     }
