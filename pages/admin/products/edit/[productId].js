@@ -1,19 +1,20 @@
+import { getSession } from 'next-auth/react';
 import ProductEditForm from '../../../../components/Products/ProductEditForm';
-import { fetchProductById, getAllIdParams } from '../../../../helpers/db-utils';
+import { fetchProductById } from '../../../../helpers/db-utils';
 
 const ProductsPage = ({ product }) => {
   return <ProductEditForm product={product} />;
 };
 
-export const getStaticProps = async context => {
+export const getServerSideProps = async context => {
+  const session = await getSession(context);
+  if (!session) return { redirect: { destination: '/', permanent: false } };
+  const user = session.user;
+
   const { productId } = context.params;
   const product = await fetchProductById(productId);
-  return { props: { product } };
-};
 
-export const getStaticPaths = async () => {
-  const paths = await getAllIdParams();
-  return { paths, fallback: 'blocking' };
+  return { props: { user, product } };
 };
 
 export default ProductsPage;

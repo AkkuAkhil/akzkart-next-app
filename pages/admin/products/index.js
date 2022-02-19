@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import ProductContainer from '../../../components/Products/ProductContainer';
@@ -29,9 +30,12 @@ const AdminProductsPage = props => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async context => {
   const products = await fetchAllProducts();
-  return { props: { products } };
+  const session = await getSession(context);
+  if (!session) return { redirect: { destination: '/', permanent: false } };
+  const user = session.user;
+  return { props: { user, products } };
 };
 
 export default AdminProductsPage;

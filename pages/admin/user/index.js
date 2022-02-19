@@ -7,6 +7,7 @@ const UserPage = ({ user }) => {
 
 export const getServerSideProps = async context => {
   const session = await getSession(context);
+  if (!session) return { redirect: { destination: '/', permanent: false } };
   const user = session.user;
   return { props: { user } };
 };

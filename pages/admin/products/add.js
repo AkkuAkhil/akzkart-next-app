@@ -1,12 +1,15 @@
-import { Fragment } from 'react';
+import { getSession } from 'next-auth/react';
 import ProductAddForm from '../../../components/Products/ProductAddForm';
 
-const AddProductPage = () => {
-  return (
-    <Fragment>
-      <ProductAddForm />
-    </Fragment>
-  );
+const AddProductPage = ({ user }) => {
+  return <ProductAddForm />;
+};
+
+export const getServerSideProps = async context => {
+  const session = await getSession(context);
+  if (!session) return { redirect: { destination: '/', permanent: false } };
+  const user = session.user;
+  return { props: { user } };
 };
 
 export default AddProductPage;
