@@ -4,7 +4,7 @@ import CartItem from './CartItem.js';
 import classes from './CartContainer.module.css';
 import { ShoppingBag, ShoppingCart } from 'react-feather';
 import { delay, generateUserId, getFirstName } from '../../helpers/utils.js';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 const CartContainer = () => {
@@ -23,7 +23,10 @@ const CartContainer = () => {
   }
 
   const checkout = async () => {
-    if (!session) return alert('Please Login to Checkout');
+    if (!session) {
+      alert('Please Login to Checkout');
+      return signIn('google');
+    }
 
     alert('Paying');
     await delay(1000);

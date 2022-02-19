@@ -66,3 +66,7 @@ button:focus {
 .icon-margin {
   margin: 0 0.3rem;
 }
+
+.cursor {
+  cursor: pointer;
+}

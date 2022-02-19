@@ -51,14 +51,12 @@ const MainHeader = props => {
                 </p>
               </span>
             ) : (
-              <span className='iconGroup'>
+              <span
+                className='iconGroup cursor'
+                onClick={() => signIn('google')}
+              >
                 <LogIn className='icon' />
-                <p
-                  className={classes.navigationUser}
-                  onClick={() => signIn('google')}
-                >
-                  Log In
-                </p>
+                <p className={classes.navigationUser}>Log In</p>
               </span>
             )}
           </li>
@@ -80,14 +78,9 @@ const MainHeader = props => {
                 <Link href='/admin/products/add'>Add Product</Link>
               </li>
               <li className={classes.subNavigationItem}>
-                <span className='iconGroup'>
+                <span className='iconGroup cursor' onClick={() => signOut()}>
                   <LogOut className='icon' />
-                  <p
-                    className={classes.navigationUser}
-                    onClick={() => signOut()}
-                  >
-                    Log Out
-                  </p>
+                  <p className={classes.navigationUser}>Log Out</p>
                 </span>
               </li>
             </ul>

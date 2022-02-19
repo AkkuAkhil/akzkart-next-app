@@ -16,7 +16,7 @@ export const fetchMyProducts = async id => {
 
 export const fetchMyOrders = async id => {
   await dbConnect();
-  const orders = await Order.find({ userId: id });
+  const orders = await Order.find({ userId: id }).sort({ date: -1 });
   return JSON.parse(JSON.stringify(orders));
 };
 

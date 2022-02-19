@@ -11,7 +11,7 @@ const handler = async (req, res) => {
   switch (method) {
     case 'GET':
       try {
-        const orders = await Order.find({ userId: id });
+        const orders = await Order.find({ userId: id }).sort({ date: -1 });
         res.status(200).json({ success: true, orders });
       } catch (error) {
         res.status(400).json({ success: false });
