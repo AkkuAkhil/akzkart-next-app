@@ -42,6 +42,33 @@
   text-align: center;
 }
 
+.subNavigationMenu {
+  position: absolute;
+  top: 100%;
+  right: 8%;
+}
+
+.subNavigationItem {
+  padding: 0.4rem 1rem;
+  border: 0;
+  margin: 0.2rem;
+  background-color: #ffffff;
+}
+
+.navigationUser {
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.navigationUser:hover {
+  text-shadow: 2px 2px 8px rgb(102, 102, 102);
+}
+
 @media screen and (max-width: 600px) {
   .navigation a {
     font-size: 0.7rem;
