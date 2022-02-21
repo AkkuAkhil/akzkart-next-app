@@ -24,7 +24,7 @@ const MainHeader = props => {
       <nav className={classes.navigation}>
         <ul className={classes.navigationContainer}>
           <li className={classes.navigationItem}>
-            <Link href='/products'>All Products</Link>
+            <Link href='/products/page/1'>All Products</Link>
           </li>
           <li className={classes.navigationItem}>
             <Cart link='/cart'>
@@ -69,7 +69,7 @@ const MainHeader = props => {
                 <Link href='/admin/user'>My Profile</Link>
               </li>
               <li className={classes.subNavigationItem}>
-                <Link href='/admin/products'>My Products</Link>
+                <Link href='/admin/products/page/1'>My Products</Link>
               </li>
               <li className={classes.subNavigationItem}>
                 <Link href='/admin/orders'>My Orders</Link>

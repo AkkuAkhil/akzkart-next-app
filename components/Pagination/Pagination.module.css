@@ -1,0 +1,27 @@
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.paginationButton {
+  border: solid 0.1rem #000;
+  margin: 0.3rem;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+.paginationArrowButton {
+  background-color: transparent;
+  border: 0;
+  margin: 0.3rem;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #000;
+  color: #fff;
+  cursor: auto;
+}

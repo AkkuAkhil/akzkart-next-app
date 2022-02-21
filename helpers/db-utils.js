@@ -46,3 +46,9 @@ export const getAllIdParams = async () => {
   const products = await Product.find({}).select('_id');
   return products.map(({ _id }) => ({ params: { productId: _id.toString() } }));
 };
+
+export const getDocumentCount = async () => {
+  await dbConnect();
+  const count = await Product.find({}).countDocuments();
+  return count;
+};

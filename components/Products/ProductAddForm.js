@@ -32,7 +32,7 @@ const ProductAddForm = ({ email }) => {
       body: JSON.stringify(product)
     });
 
-    if (response.ok) router.push('/admin/products');
+    if (response.ok) router.push('/admin/products/page/1');
   };
 
   return (
