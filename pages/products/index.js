@@ -6,7 +6,7 @@ import { fetchAllProducts } from '../../helpers/db-utils';
 const ProductsPage = props => {
   const [products, setProducts] = useState(props.products);
 
-  const { data } = useSWR('/api/products', url =>
+  const { data } = useSWR('/api/products/page/1', url =>
     fetch(url).then(res => res.json())
   );
 
@@ -18,7 +18,7 @@ const ProductsPage = props => {
 };
 
 export const getStaticProps = async () => {
-  const products = await fetchAllProducts();
+  const products = await fetchAllProducts(1);
   return { props: { products } };
 };
 

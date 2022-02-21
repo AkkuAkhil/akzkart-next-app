@@ -70,3 +70,8 @@ button:focus {
 .cursor {
   cursor: pointer;
 }
+
+.background {
+  width: 100vw;
+  height: 700px;
+}

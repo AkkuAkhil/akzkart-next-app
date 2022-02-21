@@ -1,16 +1,31 @@
 import dbConnect from '../middlewares/mongodb';
 import Product from '../models/Product';
 import Order from '../models/Order';
+import { PER_PAGE_ITEMS, FEATURED_PER_PAGE_ITEMS } from './constants';
 
-export const fetchAllProducts = async () => {
+export const fetchFeaturedProducts = async () => {
   await dbConnect();
-  const products = await Product.find({});
+  const products = await Product.find({})
+    .sort({ date: -1 })
+    .limit(FEATURED_PER_PAGE_ITEMS);
   return JSON.parse(JSON.stringify(products));
 };
 
-export const fetchMyProducts = async id => {
+export const fetchAllProducts = async (page = 1) => {
   await dbConnect();
-  const products = await Product.find({ userId: id });
+  const products = await Product.find({})
+    .sort({ date: -1 })
+    .skip((page - 1) * PER_PAGE_ITEMS)
+    .limit(PER_PAGE_ITEMS);
+  return JSON.parse(JSON.stringify(products));
+};
+
+export const fetchMyProducts = async (id, page = 1) => {
+  await dbConnect();
+  const products = await Product.find({ userId: id })
+    .sort({ date: -1 })
+    .skip((page - 1) * PER_PAGE_ITEMS)
+    .limit(PER_PAGE_ITEMS);
   return JSON.parse(JSON.stringify(products));
 };
 

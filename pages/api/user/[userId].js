@@ -1,26 +1,16 @@
 import dbConnect from '../../../middlewares/mongodb';
 import Product from '../../../models/Product';
 
-const INSERTION_SUCCESS = 'Succesfully Inserted Product';
-
 const handler = async (req, res) => {
   const { method } = req;
+  const { userId: id } = req.query;
   await dbConnect();
 
   switch (method) {
     case 'GET':
       try {
-        const products = await Product.find({}).sort({ date: -1 });
+        const products = await Product.find({ userId: id }).sort({ date: -1 });
         res.status(200).json({ success: true, products });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-    case 'POST':
-      try {
-        const product = new Product(req.body);
-        await product.save();
-        res.status(201).json({ success: true, message: INSERTION_SUCCESS });
       } catch (error) {
         res.status(400).json({ success: false });
       }

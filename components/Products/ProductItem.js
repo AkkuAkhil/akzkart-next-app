@@ -64,7 +64,7 @@ const ProductItem = ({ product, admin, setLatestProducts }) => {
         alt={product.name}
         src={product.image}
         width={256}
-        height={220}
+        height={256}
       />
       <div className={classes.productDetails}>
         <div>

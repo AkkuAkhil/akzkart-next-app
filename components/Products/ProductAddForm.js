@@ -21,7 +21,8 @@ const ProductAddForm = ({ email }) => {
       image: image.current.value,
       description: description.current.value,
       rating: 0,
-      userId: generateUserId(email)
+      userId: generateUserId(email),
+      date: Date.now()
     };
     form.current.reset();
 

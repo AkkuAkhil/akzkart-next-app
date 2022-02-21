@@ -7,7 +7,7 @@ import { generateUserId } from '../../../helpers/utils';
 
 const AdminProductsPage = props => {
   const [products, setProducts] = useState(props.products);
-  const URL = `/api/user/${props.userId}`;
+  const URL = `/api/user/${props.userId}/1`;
 
   const { data } = useSWR(URL, url => fetch(url).then(res => res.json()));
 
@@ -36,7 +36,7 @@ export const getServerSideProps = async context => {
   const user = session.user;
 
   const userId = generateUserId(user.email);
-  const products = await fetchMyProducts(userId);
+  const products = await fetchMyProducts(userId, 1);
 
   return { props: { userId, products } };
 };
