@@ -6,11 +6,13 @@ import classes from './ProductItem.module.css';
 import { Rating } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import CartContext from '../../contexts/CartContext.js';
+import NotificationContext from '../../contexts/NotificationContext.js';
 
 const ProductItem = ({ product, admin, setLatestProducts }) => {
   const router = useRouter();
   const [quantity, setQuantity] = useState(0);
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const { showNotification } = useContext(NotificationContext);
 
   let existingCartItem;
   if (cart && cart?.length)
@@ -22,9 +24,31 @@ const ProductItem = ({ product, admin, setLatestProducts }) => {
 
   const deleteHandler = async event => {
     event.preventDefault();
-    await fetch(`/api/products/${product._id}`, {
+    showNotification({
+      title: 'Deleting Product',
+      message: 'Deleting.',
+      status: 'pending'
+    });
+
+    const response = await fetch(`/api/products/${product._id}`, {
       method: 'DELETE'
     });
+
+    if (response.ok) {
+      showNotification({
+        title: 'Deleting Product',
+        message: 'Product Deleted Succesfully.',
+        status: 'success'
+      });
+      router.push('/admin/products/page/1');
+    } else {
+      showNotification({
+        title: 'Deleting Product',
+        message: 'Error Occurred while Deleting Product.',
+        status: 'error'
+      });
+    }
+
     setLatestProducts();
   };
 

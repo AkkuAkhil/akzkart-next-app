@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import classes from './ProductForm.module.css';
 import { DollarSign, FileText, Image, Plus, Tag } from 'react-feather';
 import { generateUserId } from '../../helpers/utils';
+import NotificationContext from '../../contexts/NotificationContext';
 
 const ProductAddForm = ({ email }) => {
   const router = useRouter();
+  const { showNotification } = useContext(NotificationContext);
 
   const name = useRef();
   const price = useRef();
@@ -15,6 +17,12 @@ const ProductAddForm = ({ email }) => {
 
   const submitHandler = async event => {
     event.preventDefault();
+    showNotification({
+      title: 'Adding Product',
+      message: 'Adding.',
+      status: 'pending'
+    });
+
     const product = {
       name: name.current.value,
       price: price.current.value,
@@ -32,7 +40,20 @@ const ProductAddForm = ({ email }) => {
       body: JSON.stringify(product)
     });
 
-    if (response.ok) router.push('/admin/products/page/1');
+    if (response.ok) {
+      showNotification({
+        title: 'Adding Product',
+        message: 'Product Added Succesfully.',
+        status: 'success'
+      });
+      router.push('/admin/products/page/1');
+    } else {
+      showNotification({
+        title: 'Adding Product',
+        message: 'Error Occurred while Adding Product.',
+        status: 'error'
+      });
+    }
   };
 
   return (

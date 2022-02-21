@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import classes from './ProductForm.module.css';
 import { DollarSign, FileText, Image, RefreshCw, Tag } from 'react-feather';
+import NotificationContext from '../../contexts/NotificationContext';
 
 const ProductEditForm = ({ product }) => {
   const form = useRef();
@@ -10,9 +11,16 @@ const ProductEditForm = ({ product }) => {
   const [price, setPrice] = useState(product.price);
   const [image, setImage] = useState(product.image);
   const [description, setDescription] = useState(product.description);
+  const { showNotification } = useContext(NotificationContext);
 
   const submitHandler = async event => {
     event.preventDefault();
+    showNotification({
+      title: 'Updating Product',
+      message: 'Updating.',
+      status: 'pending'
+    });
+
     const updatedProduct = { name, price, image, description };
     form.current.reset();
 
@@ -22,7 +30,20 @@ const ProductEditForm = ({ product }) => {
       body: JSON.stringify(updatedProduct)
     });
 
-    if (response.ok) router.push('/admin/products');
+    if (response.ok) {
+      showNotification({
+        title: 'Updating Product',
+        message: 'Product Updated Succesfully.',
+        status: 'success'
+      });
+      router.push('/admin/products/page/1');
+    } else {
+      showNotification({
+        title: 'Updating Product',
+        message: 'Error Occurred while Updating Product.',
+        status: 'error'
+      });
+    }
   };
 
   return (
